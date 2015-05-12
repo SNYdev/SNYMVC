@@ -24,7 +24,6 @@ class UserController {
      */
 
     public function listShop(){
-        echo 'lol';
     }
 
     public function listUserAction($request) {
@@ -32,14 +31,12 @@ class UserController {
 
         /*****/
         $config = new \Doctrine\DBAL\Configuration();
-
-
         //for this array use config_dev.yml and YamlComponents
         // http://symfony.com/fr/doc/current/components/yaml/introduction.html
         $connectionParams = array(
-            'dbname' => 'mydb',
-            'user' => 'user',
-            'password' => 'secret',
+            'dbname' => 'website',
+            'user' => 'root',
+            'password' => 'root',
             'host' => 'localhost',
             'driver' => 'pdo_mysql',
         );
@@ -71,12 +68,13 @@ class UserController {
     public function showUserAction($request) {
         //Use Doctrine DBAL here
 
-        $user = ...
+        $user = $request;
 
         //you can return a Response object
         return [
             'view' => 'WebSite/View/user/showUser.html.php', // should be Twig : 'WebSite/View/user/listUser.html.twig'
             'user' => $user
+
         ];
     }
 
