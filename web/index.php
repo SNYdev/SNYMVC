@@ -12,27 +12,35 @@ require __DIR__ . '/../vendor/autoload.php';
  *
  */
 $routes = Yaml::parse(file_get_contents(__DIR__.'/../app/config/routing.yml'));
+var_dump($routes);
 
-if(isset($_GET['p'])){
- $currentroute = $routes[$_GET['p']]['controller'];
- $routes_array = explode(':',$currentroute);
- var_dump($routes);
-//ControllerClassName, end name is ...Controller
- $controller_class = $routes_array[0];
+if(isset($_GET['p'])) {
+	 $currentroute = $routes[$_GET['p']]['controller'];
+	 $routes_array = explode(':', $currentroute));
 
-//ActionName, end name is ...Action
- $action_name = $routes_array[1];
- $controller = new $controller_class();
+	//ControllerClassName, end name is ...Controller
+	 $controller_class = $routes_array[0];
+	
+	//ActionName, end name is ...Action
+	 $action_name = $routes_array[1];
+	 $controller = new $controller_class();
+	
 
-//$Request can by an object
- $request['request'] = &$_POST;
- $request['query'] = &$_GET;
-//...
-//$response can be an object
- $response = $controller->$action_name($request);
- /**
-  * Use Twig !
-  */
+	//$Request can by an object
+	 $request['request'] = &$_POST;
+	 $request['query'] = &$_GET;
+	 $request['session'] = &$_SESSION;
+	//...
 
- require $response['view'];
+	//$response can be an object
+	 $response = $controller->$action_name($request);
+	 
+	 /**
+	  * Use Twig !
+	  */
+
+ 	require ___DIR__.'../src/'.$response['view'];
 }
+
+var_dump($_POST);
+var_dump($_SESSION);
